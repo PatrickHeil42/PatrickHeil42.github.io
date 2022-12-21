@@ -83,6 +83,9 @@ function getWeather(){
  		        if(markerOne === "Windy"){
                                 document.getElementById("day1Image").src = "https://imgur.com/Q1NbBFY.jpeg";
                         }
+                        if(markerOne === "Snow") {
+                                document.getElementById("day1Image").src = "https://imgur.com/a/Kn9Egay";
+                        }
 			//Day 2  is [9]?
 
 			$("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);
@@ -105,7 +108,9 @@ function getWeather(){
                         if(markerTwo === "Windy"){
                                 document.getElementById("day2Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
-
+                        if(markerTwo === "Snow") {
+                                document.getElementById("day2Image").src = "https://imgur.com/a/Kn9Egay";
+                        }
 
 			//Day 3 is [17]
                         $("#day3Text").html(data.list[17].dt_txt  + "<br>" + data.list[17].weather[0].main + "<br>" + "Temperature is " + data.list[17].main.temp + "<br>" + "Feels like "+ data.list[17].main.feels_like);
@@ -128,7 +133,9 @@ function getWeather(){
                         if(markerThree === "Windy"){
                                 document.getElementById("day3Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
-		
+                        if(markerThree === "Snow") {
+                                document.getElementById("day3Image").src = "https://imgur.com/a/Kn9Egay";
+                        }
 
 			//Day 4 Noon is [25]
                         $("#day4Text").html(data.list[25].dt_txt  + "<br>" + data.list[25].weather[0].main + "<br>" + "Temperature is " + data.list[25].main.temp + "<br>" + "Feels like "+ data.list[25].main.feels_like);
@@ -152,7 +159,9 @@ function getWeather(){
                         if(markerFour === "Windy"){
                                 document.getElementById("day4Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
-
+                        if(markerFour === "Snow") {
+                                document.getElementById("day4Image").src = "https://imgur.com/a/Kn9Egay";
+                        }
 		
 
 			//Day 5 Noon is [33]
@@ -176,7 +185,9 @@ function getWeather(){
                         if(markerFive === "Windy"){
                                 document.getElementById("day5Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
-		
+                        if(markerFive === "Snow") {
+                                document.getElementById("day5Image").src = "https://imgur.com/a/Kn9Egay";
+                        }
 			},
 
                         // Error handling
