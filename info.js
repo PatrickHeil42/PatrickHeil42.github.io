@@ -60,7 +60,7 @@ function getWeather(){
 //<img id ="sunny" src="https://imgur.com/3WQTUln.jpeg" width="20px" height="20px">
 //<img id="cloudy" src="https://imgur.com/mf5htvc.jpeg" width="20px" height="20px">
 //<img id="windy"  src="https://imgur.com/Q1NbBFY.jpeg" width="20px" height="20px">
- 
+//<img id = "clear" src="https://imgur.com/a/VeMx66t.jpeg" width="20px" height="20px">
                         $("#YourCity").html(data.city.name);
 			//3 hours ahead is [1]
                         $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
@@ -84,8 +84,12 @@ function getWeather(){
                                 document.getElementById("day1Image").src = "https://imgur.com/Q1NbBFY.jpeg";
                         }
                         if(markerOne === "Snow") {
-                                document.getElementById("day1Image").src = "https://imgur.com/a/Kn9Egay";
+                                document.getElementById("day1Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
                         }
+                        if(markerOne === "Clear") {
+                                document.getElementById("day1Image").src = " https://imgur.com/a/VeMx66t.jpeg";
+                        }
+                       
 			//Day 2  is [9]?
 
 			$("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);
@@ -109,7 +113,10 @@ function getWeather(){
                                 document.getElementById("day2Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
                         if(markerTwo === "Snow") {
-                                document.getElementById("day2Image").src = "https://imgur.com/a/Kn9Egay";
+                                document.getElementById("day2Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
+                        }
+                        if(markerTwo === "Clear") {
+                                document.getElementById("day2Image").src = " https://imgur.com/a/VeMx66t.jpeg";
                         }
 
 			//Day 3 is [17]
@@ -134,9 +141,11 @@ function getWeather(){
                                 document.getElementById("day3Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
                         if(markerThree === "Snow") {
-                                document.getElementById("day3Image").src = "https://imgur.com/a/Kn9Egay";
+                                document.getElementById("day3Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
                         }
-
+                        if(markerThree === "Clear") {
+                                document.getElementById("day3Image").src = " https://imgur.com/a/VeMx66t.jpeg";
+                        }
 			//Day 4 Noon is [25]
                         $("#day4Text").html(data.list[25].dt_txt  + "<br>" + data.list[25].weather[0].main + "<br>" + "Temperature is " + data.list[25].main.temp + "<br>" + "Feels like "+ data.list[25].main.feels_like);
 			
@@ -160,9 +169,11 @@ function getWeather(){
                                 document.getElementById("day4Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
                         if(markerFour === "Snow") {
-                                document.getElementById("day4Image").src = "https://imgur.com/a/Kn9Egay";
+                                document.getElementById("day4Image").src = "https://imgur.com/a/Kn9Egay,jpeg";
                         }
-		
+                        if(markerFour === "Clear") {
+                                document.getElementById("day4Image").src = " https://imgur.com/a/VeMx66t.jpeg";
+                        }
 
 			//Day 5 Noon is [33]
                         $("#day5Text").html(data.list[33].dt_txt  + "<br>" + data.list[33].weather[0].main + "<br>" + "Temperature is " + data.list[33].main.temp + "<br>" + "Feels like "+ data.list[33].main.feels_like);
@@ -186,7 +197,10 @@ function getWeather(){
                                 document.getElementById("day5Image").src= "https://imgur.com/Q1NbBFY.jpeg";
                         }
                         if(markerFive === "Snow") {
-                                document.getElementById("day5Image").src = "https://imgur.com/a/Kn9Egay";
+                                document.getElementById("day5Image").src = "https://imgur.com/a/Kn9Egay,jpeg";
+                        }
+                        if(markerFive === "Clear") {
+                                document.getElementById("day5Image").src = " https://imgur.com/a/VeMx66t.jpeg";
                         }
 			},
 
