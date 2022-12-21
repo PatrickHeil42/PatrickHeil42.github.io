@@ -28,12 +28,12 @@ function getCoords() {
 		
                 success: function (data) {
 		var x = data.results[0];	
-           	 
+           	console.log(x);
                 var lat = x.position.lat;
 		var lon = x.position.lon;
 		$("#lat").html(lat);
 		$("#lon").html(lon);
-
+                //$("#YourCity".html(x.))
 		getWeather();
                // Error handling
 		},
