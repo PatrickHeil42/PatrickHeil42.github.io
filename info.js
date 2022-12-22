@@ -33,7 +33,7 @@ function getCoords() {
 		var lon = x.position.lon;
 		$("#lat").html(lat);
 		$("#lon").html(lon);
-                $("#YourCity".html(x.address.municipality + ", " + x.address.country.countrySubdivision));
+               // $("#YourCity".html(x.address.municipality + ", " + x.address.country.countrySubdivision));
 		getWeather();
                // Error handling
 		},
