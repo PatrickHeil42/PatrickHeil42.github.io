@@ -61,144 +61,38 @@ function getWeather(){
 //<img id="cloudy" src="https://imgur.com/mf5htvc.jpeg" width="20px" height="20px">
 //<img id="windy"  src="https://imgur.com/Q1NbBFY.jpeg" width="20px" height="20px">
 //<img id = "clear" src="https://imgur.com/a/VeMx66t.jpeg" width="20px" height="20px">
+//http://openweathermap.org/img/wn/01n@2x.png
                        // $("#YourCity").html(data.city.name);
 			//3 hours ahead is [1]
                         $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
-
 			$("#day1Marker").html(data.list[1].weather[0].main);	
 			var markerOne = document.getElementById('day1Marker').innerText;
-	
-			if(markerOne === "Rain"){
-				document.getElementById("day1Image").src= "https://imgur.com/50Z4xx0.jpeg";
-			}
-			if(markerOne === "Storm"){
-                                document.getElementById("day1Image").src= "https://imgur.com/847iqmd.jpeg";
-                        }
-			if(markerOne === "Sunny"){
-                               document.getElementById("day1Image").src= "https://imgur.com/3WQTUln.jpeg";
-                        }
-			if(markerOne === "Clouds"){
-				document.getElementById("day1Image").src= "https://imgur.com/mf5htvc.jpeg";
-			}
- 		        if(markerOne === "Windy"){
-                                document.getElementById("day1Image").src = "https://imgur.com/Q1NbBFY.jpeg";
-                        }
-                        if(markerOne === "Snow") {
-                                document.getElementById("day1Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
-                        }
-                        if(markerOne === "Clear") {
-                                document.getElementById("day1Image").src = " https://imgur.com/a/VeMx66t.jpeg";
-                        }
-                       
-			//Day 2  is [9]?
-
-		       $("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);
+                        document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[1].weather[0].icon + "@2x.png";
 			
+			//Day 2  is [9]?
+		       $("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);	
                        $("#day2Marker").html(data.list[9].weather[0].main);
                         var markerTwo = document.getElementById("day2Marker").innerText;
-                        if(markerTwo === "Rain"){
-                                document.getElementById("day2Image").src= "https://imgur.com/50Z4xx0.jpeg";
-                        }
-                        if(markerTwo === "Storm"){
-                                document.getElementById("day2Image").src= "https://imgur.com/847iqmd.jpeg";
-                        }
-                        if(markerTwo === "Sunny"){
-                               document.getElementById("day2Image").src= "https://imgur.com/3WQTUln.jpeg";
-                        }
-                        if(markerTwo === "Clouds"){
-                                document.getElementById("day2Image").src="https://imgur.com/mf5htvc.jpeg";
-                        }
-                        if(markerTwo === "Windy"){
-                                document.getElementById("day2Image").src= "https://imgur.com/Q1NbBFY.jpeg";
-                        }
-                        if(markerTwo === "Snow") {
-                                document.getElementById("day2Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
-                        }
-                        if(markerTwo === "Clear") {
-                                document.getElementById("day2Image").src = " https://imgur.com/a/VeMx66t.jpeg";
-                        }
-
-			//Day 3 is [17]
+                        document.getElementById("day2Image").src="http://openweathermap.org/img/wn/" + data.list[9].weather[0].icon + "@2x.png";
+			
+                        //Day 3 is [17]
                         $("#day3Text").html(data.list[17].dt_txt  + "<br>" + data.list[17].weather[0].main + "<br>" + "Temperature is " + data.list[17].main.temp + "<br>" + "Feels like "+ data.list[17].main.feels_like);
                         $("#day3Marker").html(data.list[17].weather[0].main);
                        var markerThree = document.getElementById("day3Marker").innerText;
-                        if(markerThree === "Rain"){
-                                document.getElementById("day3Image").src= "https://imgur.com/50Z4xx0.jpeg";
-                        }
-                        if(markerThree === "Storm"){
-                                document.getElementById("day3Image").src= "https://imgur.com/847iqmd.jpeg";
-                        }
-                        if(markerThree === "Sunny"){
-                               document.getElementById("day3Image").src= "https://imgur.com/3WQTUln.jpeg";
-                        }
-                        if(markerThree == "Clouds"){
-                                document.getElementById("day3Image").src="https://imgur.com/mf5htvc.jpeg";
-                        }
-                        if(markerThree === "Windy"){
-                                document.getElementById("day3Image").src= "https://imgur.com/Q1NbBFY.jpeg";
-                        }
-                        if(markerThree === "Snow") {
-                                document.getElementById("day3Image").src = "https://imgur.com/a/Kn9Egay.jpeg";
-                        }
-                        if(markerThree === "Clear") {
-                                document.getElementById("day3Image").src = " https://imgur.com/a/VeMx66t.jpeg";
-                        }
-			//Day 4 Noon is [25]
+                       document.getElementById("day3Image").src="http://openweathermap.org/img/wn/" + data.list[17].weather[0].icon + "@2x.png";
+			
+                       //Day 4 Noon is [25]
                         $("#day4Text").html(data.list[25].dt_txt  + "<br>" + data.list[25].weather[0].main + "<br>" + "Temperature is " + data.list[25].main.temp + "<br>" + "Feels like "+ data.list[25].main.feels_like);
-			
-			
                         $("#day4Marker").html(data.list[25].weather[0].main);
                         var markerFour = document.getElementById("day4Marker");
-
-                        if(markerFour === "Rain"){
-                                document.getElementById("day4Image").src= "https://imgur.com/50Z4xx0.jpeg";
-                        }
-                        if(markerFour === "Storm"){
-                                document.getElementById("day4Image").src= "https://imgur.com/847iqmd.jpeg";
-                        }
-                        if(markerFour === "Sunny"){
-                               document.getElementById("day4Image").src= "https://imgur.com/3WQTUln.jpeg";
-                        }
-                        if(markerFour === "Clouds"){
-                                document.getElementById("day4Image").src="https://imgur.com/mf5htvc.jpeg";
-                        }
-                        if(markerFour === "Windy"){
-                                document.getElementById("day4Image").src= "https://imgur.com/Q1NbBFY.jpeg";
-                        }
-                        if(markerFour === "Snow") {
-                                document.getElementById("day4Image").src = "https://imgur.com/a/Kn9Egay,jpeg";
-                        }
-                        if(markerFour === "Clear") {
-                                document.getElementById("day4Image").src = " https://imgur.com/a/VeMx66t.jpeg";
-                        }
+                        document.getElementById("day4Image").src="http://openweathermap.org/img/wn/" + data.list[25].weather[0].icon + "@2x.png";
 
 			//Day 5 Noon is [33]
                         $("#day5Text").html(data.list[33].dt_txt  + "<br>" + data.list[33].weather[0].main + "<br>" + "Temperature is " + data.list[33].main.temp + "<br>" + "Feels like "+ data.list[33].main.feels_like);
-			
                         $("#day5Marker").html(data.list[33].weather[0].main);
                         var markerFive = document.getElementById("day5Marker");
-
-                        if(markerFive === "Rain"){
-                                document.getElementById("day5Image").src= "https://imgur.com/50Z4xx0.jpeg";
-                        }
-                        if(markerFive === "Storm"){
-                                document.getElementById("day5Image").src= "https://imgur.com/847iqmd.jpeg";
-                        }
-                        if(markerFive === "Sunny"){
-                               document.getElementById("day5Image").src= "https://imgur.com/3WQTUln.jpeg";
-                        }
-                        if(markerFive === "Clouds"){
-                                document.getElementById("day5Image").src="https://imgur.com/mf5htvc.jpeg";
-                        }
-                        if(markerFive === "Windy"){
-                                document.getElementById("day5Image").src= "https://imgur.com/Q1NbBFY.jpeg";
-                        }
-                        if(markerFive === "Snow") {
-                                document.getElementById("day5Image").src = "https://imgur.com/a/Kn9Egay,jpeg";
-                        }
-                        if(markerFive === "Clear") {
-                                document.getElementById("day5Image").src = " https://imgur.com/a/VeMx66t.jpeg";
-                        }
+                        document.getElementById("day5Image").src="http://openweathermap.org/img/wn/" + data.list[33].weather[0].icon + "@2x.png";
+                        
 			},
 
                         // Error handling
