@@ -33,7 +33,7 @@ function getCoords() {
 		var lon = x.position.lon;
 		$("#lat").html(lat);
 		$("#lon").html(lon);
-                //$("#YourCity".html(x.))
+                $("#YourCity".html(x.address.municipality + ", " + x.address.country.countrySubdivision));
 		getWeather();
                // Error handling
 		},
@@ -61,7 +61,7 @@ function getWeather(){
 //<img id="cloudy" src="https://imgur.com/mf5htvc.jpeg" width="20px" height="20px">
 //<img id="windy"  src="https://imgur.com/Q1NbBFY.jpeg" width="20px" height="20px">
 //<img id = "clear" src="https://imgur.com/a/VeMx66t.jpeg" width="20px" height="20px">
-                        $("#YourCity").html(data.city.name);
+                       // $("#YourCity").html(data.city.name);
 			//3 hours ahead is [1]
                         $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
 
@@ -92,8 +92,7 @@ function getWeather(){
                        
 			//Day 2  is [9]?
 
-			$("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);
-		
+		       $("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);
 			
                        $("#day2Marker").html(data.list[9].weather[0].main);
                         var markerTwo = document.getElementById("day2Marker").innerText;
@@ -121,9 +120,7 @@ function getWeather(){
 
 			//Day 3 is [17]
                         $("#day3Text").html(data.list[17].dt_txt  + "<br>" + data.list[17].weather[0].main + "<br>" + "Temperature is " + data.list[17].main.temp + "<br>" + "Feels like "+ data.list[17].main.feels_like);
-			
-			
-                       $("#day3Marker").html(data.list[17].weather[0].main);
+                        $("#day3Marker").html(data.list[17].weather[0].main);
                        var markerThree = document.getElementById("day3Marker").innerText;
                         if(markerThree === "Rain"){
                                 document.getElementById("day3Image").src= "https://imgur.com/50Z4xx0.jpeg";
