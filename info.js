@@ -33,9 +33,10 @@ function getCoords() {
 		var lon = x.position.lon;
 		$("#lat").html(lat);
 		$("#lon").html(lon);
-               // $("#YourCity".html(x.address.municipality + ", " + x.address.country.countrySubdivision));
 		getWeather();
-               // Error handling
+                $("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+
+                //Error handling
 		},
                 error: function (error) {
                 alert("Error");
@@ -92,7 +93,6 @@ function getWeather(){
                         $("#day5Marker").html(data.list[33].weather[0].main);
                         var markerFive = document.getElementById("day5Marker");
                         document.getElementById("day5Image").src="http://openweathermap.org/img/wn/" + data.list[33].weather[0].icon + "@2x.png";
-                        
 			},
 
                         // Error handling
