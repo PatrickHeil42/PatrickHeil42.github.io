@@ -67,12 +67,18 @@ SOFTWARE.
 
 <div class="container">
   <h3>Log </h3>
-  <form method="post">
-  <label for="lookupDate">Date: </label><br>
-  <input type="date" id="lookupDate" name="lookupDate">
-  <input type="submit" name="button1"
-                class="button" onClick= "findWeather()" value="Search" />
-</form>
+  
+  <div class="container">
+    <h3>Weather </h3>
+    <p> Welcome. Please enter the address you want a forecast for: </p>
+    <label for="address">Address</label><br>
+    <input type="text" id="address" name="address">
+    <h3> <button type="button" onClick= "getCoords()" class="btn btn-primary">Search</button></h3>
+  
+  <div id="lat" style="display: none;"><h2>Latitude </h2></div>
+  <div id="lon" style="display: none;"><h2>Longitude </h2></div>
+  <div id="results"style="display: none;"><h2>Results </h2></div>
+  <br>
   <p id = "loggedEvents"> </p>
 
 </div>

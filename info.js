@@ -55,16 +55,6 @@ function getWeather(){
                         success: function (data){
                        
                         console.log(data);
-//**
-//<img id="rain" src="https://imgur.com/50Z4xx0.jpeg" width="20px" height="20px">
-//<img id="storm" src="https://imgur.com/847iqmd.jpeg" width="20px" height="20px">
-//<img id ="sunny" src="https://imgur.com/3WQTUln.jpeg" width="20px" height="20px">
-//<img id="cloudy" src="https://imgur.com/mf5htvc.jpeg" width="20px" height="20px">
-//<img id="windy"  src="https://imgur.com/Q1NbBFY.jpeg" width="20px" height="20px">
-//<img id = "clear" src="https://imgur.com/a/VeMx66t.jpeg" width="20px" height="20px">
-//http://openweathermap.org/img/wn/01n@2x.png
-                       // $("#YourCity").html(data.city.name);
-			//3 hours ahead is [1]
                         $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
 			$("#day1Marker").html(data.list[1].weather[0].main);	
 			var markerOne = document.getElementById('day1Marker').innerText;
@@ -128,6 +118,34 @@ function findWeather(){
                 }
             });
         
-	
 
+
+}
+
+function getSateliteImage(){
+
+        var lon=document.getElementById("lon").innerText;
+        var lat=document.getElementById("lat").innerText;
+        var satURL = "https://api.nasa.gov/planetary/earth/imagery";
+
+        var satURLBackHalf = "lat=" + lat + "&lon=" + lon + "api_key=B9s7aMUpoaRCFqHygyKyAe0n5OLzWEYAMndCnZnf";
+        $.ajax({
+                url: satURL+ satURLBackHalf,
+                type: "GET",
+                success: function (data){
+               
+                console.log(data);
+                /*
+                $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
+                $("#day1Marker").html(data.list[1].weather[0].main);	
+                var markerOne = document.getElementById('day1Marker').innerText;
+                document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[1].weather[0].icon + "@2x.png";
+                */
+        },
+                // Error handling
+                error: function (error) {
+                        alert("Error");
+                }
+
+      });
 }
