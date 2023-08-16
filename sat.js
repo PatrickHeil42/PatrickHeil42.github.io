@@ -1,0 +1,155 @@
+//var coordsURL = "https://api.tomtom.com/search/2/geocode/";
+//working URL in full: https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-16T00:00:00Z&BBOX=9.5239,-3.8314,10.8241,-2.2711&CRS=EPSG:4326&LAYERS=BlueMarble_ShadedRelief_Bathymetry,Coastlines_15m&WRAP=x,x&FORMAT=image/jpeg&WIDTH=5681&HEIGHT=4734&MARKER=-87.6325,41.8843&ts=1692212125148
+var coordsURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-16T00:00Z&BBOX="
+var backHalfCoords =".json?storeResult=false&limit=1&view=Unified&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn";
+//getCoords();
+//Working URL: https://api.tomtom.com/search/2/geocode/benton%20hall.json?storeResult=false&view=Unified&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn
+var fuzzySearchUrl = "https://api.tomtom.com/search/2/search/";
+var backHalfFuzzy = ".json?limit=1&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=all&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn";
+
+function getSateliteImage() {
+        
+	var addressItem = document.getElementById('address');
+	if (addressItem.value.length==0){
+	alert ("Please enter an address in the address box");
+
+	} else { 
+		var input = addressItem.value;
+        	var encodedInput = encodeURI(input);
+		//url = url1 + url2 + url3
+		//url1="search/"
+		//url3=".json"
+		$.ajax({
+		
+                // Our sample url to make request
+                // url: "https://api.tomtom.com/search/2/geocode/benton%20hall.json?storeResult=false&view=Unified&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn",
+		url: fuzzySearchUrl + encodedInput + backHalfFuzzy,
+
+                // Type of Request
+                type: "GET",
+		
+                success: function (data) {
+		var x = data.results[0];	
+           	console.log(x);
+                var lat = x.position.lat;
+		var lon = x.position.lon;
+		$("#lat").html(lat);
+		$("#lon").html(lon);
+		getWeather();
+                //$("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+                
+
+                //Error handling
+		},
+                error: function (error) {
+                alert("Error");
+                }
+            });
+	}		
+}
+function getWeather(){
+	var lat=document.getElementById("lat").innerText;
+	var lon=document.getElementById("lon").innerText;
+                var mapURL = "https://api.openweathermap.org/data/2.5/forecast?";
+                var mapURLBackHalf = "lat=" + lat + "&lon=" + lon + "&units=imperial&appid=520ff607520c3a81ffe9ce4c41a2c28e";
+                $.ajax({
+                        url: mapURL+ mapURLBackHalf,
+                        type: "GET",
+                        success: function (data){
+                        //document.getElementById("YourCity").html = data.address.municipality + ", " + data.address.countrySubdivisionName;
+                        $("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+                        console.log(data);
+                        $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
+			$("#day1Marker").html(data.list[1].weather[0].main);	
+			var markerOne = document.getElementById('day1Marker').innerText;
+                        document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[1].weather[0].icon + "@2x.png";
+			
+			//Day 2  is [9]?
+		       $("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);	
+                       $("#day2Marker").html(data.list[9].weather[0].main);
+                        var markerTwo = document.getElementById("day2Marker").innerText;
+                        document.getElementById("day2Image").src="http://openweathermap.org/img/wn/" + data.list[9].weather[0].icon + "@2x.png";
+			
+                        //Day 3 is [17]
+                        $("#day3Text").html(data.list[17].dt_txt  + "<br>" + data.list[17].weather[0].main + "<br>" + "Temperature is " + data.list[17].main.temp + "<br>" + "Feels like "+ data.list[17].main.feels_like);
+                        $("#day3Marker").html(data.list[17].weather[0].main);
+                       var markerThree = document.getElementById("day3Marker").innerText;
+                       document.getElementById("day3Image").src="http://openweathermap.org/img/wn/" + data.list[17].weather[0].icon + "@2x.png";
+			
+                       //Day 4 Noon is [25]
+                        $("#day4Text").html(data.list[25].dt_txt  + "<br>" + data.list[25].weather[0].main + "<br>" + "Temperature is " + data.list[25].main.temp + "<br>" + "Feels like "+ data.list[25].main.feels_like);
+                        $("#day4Marker").html(data.list[25].weather[0].main);
+                        var markerFour = document.getElementById("day4Marker");
+                        document.getElementById("day4Image").src="http://openweathermap.org/img/wn/" + data.list[25].weather[0].icon + "@2x.png";
+
+			//Day 5 Noon is [33]
+                        $("#day5Text").html(data.list[33].dt_txt  + "<br>" + data.list[33].weather[0].main + "<br>" + "Temperature is " + data.list[33].main.temp + "<br>" + "Feels like "+ data.list[33].main.feels_like);
+                        $("#day5Marker").html(data.list[33].weather[0].main);
+                        var markerFive = document.getElementById("day5Marker");
+                        document.getElementById("day5Image").src="http://openweathermap.org/img/wn/" + data.list[33].weather[0].icon + "@2x.png";
+			},
+
+                        // Error handling
+                        error: function (error) {
+                                alert("Error");
+                        }
+	});
+                
+
+}
+function findWeather(){
+ 	var addressItem = document.getElementById('dateInput');
+                var input2 = addressItem;
+                var encodedInput2 = input2;
+                //url = url1 + url2 + url3
+                //url1="search/"
+                //url3=".json"
+                $.ajax({
+
+			url: "http://172.17.13.162/cse383_final_project/final.php?method=getWeather&date=" + ecodedInput2 ,
+
+                // Type of Request
+                type: "GET",
+
+                success: function (data) {
+              	console.log(data);
+		$("#loggedEvents").innerHTML(data);	
+               // getWeather();
+               // Error handling
+                },
+                error: function (error) {
+                alert("Error");
+                }
+            });
+        
+
+
+}
+
+function getSateliteImage(){
+
+        var lon=document.getElementById("lon").innerText;
+        var lat=document.getElementById("lat").innerText;
+        var satURL = "https://api.nasa.gov/planetary/earth/imagery";
+
+        var satURLBackHalf = "lat=" + lat + "&lon=" + lon + "api_key=B9s7aMUpoaRCFqHygyKyAe0n5OLzWEYAMndCnZnf";
+        $.ajax({
+                url: satURL+ satURLBackHalf,
+                type: "GET",
+                success: function (data){
+               
+                console.log(data);
+                /*
+                $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
+                $("#day1Marker").html(data.list[1].weather[0].main);	
+                var markerOne = document.getElementById('day1Marker').innerText;
+                document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[1].weather[0].icon + "@2x.png";
+                */
+        },
+                // Error handling
+                error: function (error) {
+                        alert("Error");
+                }
+
+      });
+}
