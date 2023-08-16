@@ -34,7 +34,8 @@ function getCoords() {
 		$("#lat").html(lat);
 		$("#lon").html(lon);
 		getWeather();
-                $("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+                //$("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+                $("#YourCity").html("changed");
 
                 //Error handling
 		},
