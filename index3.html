@@ -85,7 +85,7 @@ SOFTWARE.
 
     <div class="accordion" id="satMaps">
       <div class="accordion-item">
-        <h2 class="accordion-header" id="vegetationMap">
+        <h2 class="accordion-header" id="reflectanceMap">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
            Satellite Reflectance USA 
           </button>
@@ -97,7 +97,7 @@ SOFTWARE.
         </div>
       </div>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="nightMap">
+        <h2 class="accordion-header" id="vegetationMap">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             Vegetation Map USA
           </button>
@@ -110,14 +110,15 @@ SOFTWARE.
         </div>
       </div>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
+        <h2 class="accordion-header" id="nightMap">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             Accordion Item #3
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-16T00:00:00Z&BBOX=22.7723,-129.3247,51.5609,-70.1482&CRS=EPSG:4326&LAYERS=VIIRS_SNPP_DayNightBand_AtSensor_M15,VIIRS_SNPP_DayNightBand_At_Sensor_Radiance,Coastlines_15m&WRAP=none,none,x&FORMAT=image/jpeg&WIDTH=6733&HEIGHT=3276&ts=1692215357083" width="2244px" height="1092px" alt="night map USA" />
+
           </div>
         </div>
       </div>
