@@ -35,7 +35,7 @@ function getCoords() {
 		$("#lon").html(lon);
 		getWeather();
                 //$("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
-                $("#YourCity").html("changed");
+                
 
                 //Error handling
 		},
@@ -54,7 +54,8 @@ function getWeather(){
                         url: mapURL+ mapURLBackHalf,
                         type: "GET",
                         success: function (data){
-                       
+                        //document.getElementById("YourCity").html = data.address.municipality + ", " + data.address.countrySubdivisionName;
+                        $("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
                         console.log(data);
                         $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
 			$("#day1Marker").html(data.list[1].weather[0].main);	
