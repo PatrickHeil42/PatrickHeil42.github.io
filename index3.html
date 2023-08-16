@@ -87,24 +87,25 @@ SOFTWARE.
       <div class="accordion-item">
         <h2 class="accordion-header" id="vegetationMap">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-           Vegetation Map USA
+           Satellite Reflectance USA 
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <img src="https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-09T00:00:00Z&BBOX=22.7748,-129.3541,51.607,-70.1721&CRS=EPSG:4326&LAYERS=MODIS_Combined_L4_FPAR_4Day,MODIS_Combined_L4_FPAR_8Day,Coastlines_15m,Reference_Features_15m&WRAP=none,none,x,x&FORMAT=image/jpeg&WIDTH=6734&HEIGHT=3280&ts=1692217239192" alt="vegetation map USA" />
+            <img src = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-15T00:00:00Z&BBOX=22.7723,-129.3247,51.5609,-70.1482&CRS=EPSG:4326&LAYERS=VIIRS_SNPP_CorrectedReflectance_TrueColor,Coastlines_15m,Reference_Features_15m&WRAP=day,x,x&FORMAT=image/jpeg&WIDTH=6733&HEIGHT=3276&ts=1692214779738"width="2244px" height="1092px" alt="reflectance map USA" />
           </div>
         </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="nightMap">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Accordion Item #2
+            Vegetation Map USA
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-09T00:00:00Z&BBOX=22.7748,-129.3541,51.607,-70.1721&CRS=EPSG:4326&LAYERS=MODIS_Combined_L4_FPAR_4Day,MODIS_Combined_L4_FPAR_8Day,Coastlines_15m,Reference_Features_15m&WRAP=none,none,x,x&FORMAT=image/jpeg&WIDTH=6734&HEIGHT=3280&ts=1692217239192" width="2244px" height="1092px" alt="vegetation map USA" />
+
           </div>
         </div>
       </div>
