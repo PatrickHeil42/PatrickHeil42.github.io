@@ -42,18 +42,23 @@ function getCoords() {
                 //var fullURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-17T19:40:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=GOES-East_ABI_Band2_Red_Visible_1km,GOES-East_ABI_Band13_Clean_Infrared,Coastlines_15m,Reference_Features_15m,Reference_Labels_15m&WRAP=x,x,x,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692304385170";
 		$("#lat").html(lat);
 		$("#lon").html(lon);
+                //$("#url").html(fullURL);
+		
 
 		getWeather();
-                $("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
+                $("#url").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
                 console.log(fullURL);
-                //$("#results").attr("src",fullURL);
-                $("#results").attr('src', fullURL);
+                $("#url").attr("href",fullURL);
+                
+                //window.location.reload();
+                
                 //Error handling
 		},
                 error: function (error) {
                 alert("Error");
                 }
             });
+           
 	}		
 }
 function getWeather(){
