@@ -63,17 +63,22 @@ function getCoords() {
                 today = yyyy + '-' + mm + '-' + dd;
                 var todayString = today.toString();
                 var radarURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=" + todayString + "T00:00:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=GOES-East_ABI_Band2_Red_Visible_1km,GOES-East_ABI_Band13_Clean_Infrared,GOES-West_ABI_Band13_Clean_Infrared,Himawari_AHI_Band13_Clean_Infrared,Coastlines_15m,Reference_Features_15m,Reference_Labels_15m&WRAP=x,x,x,x,x,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692306914001";
-                var clearURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=" + todayString + "T00:00:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor,Coastlines_15m,Reference_Features_15m&WRAP=day,x,x&FORMAT=image/jpeg&WIDTH=2987&HEIGHT=2588" + marker + "&ts=1692389710811";
+                var clearURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=" + todayString + "T00:00:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor,Coastlines_15m,Reference_Features_15m&WRAP=day,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692389710811";
                 $("#lat").html(lat);
 		$("#lon").html(lon);
-		
+                
 
-		getWeather();
+
+		//getWeather();
                 $("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
                 console.log(radarURL);
+                console.log(clearURL);
                 $("#radarURL").attr("href",radarURL);
                 $("#clearURL").attr("href",clearURL);
-
+                
+                $("#radarURL").html("Radar link");
+                $("#clearURL").html("Clear View link");
+                $("#nightURL").html("Night View link");
                 //window.location.reload();
                 
                 //Error handling
