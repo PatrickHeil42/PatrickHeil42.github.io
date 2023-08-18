@@ -82,11 +82,17 @@ SOFTWARE. -->
 
 <div class="container">
   <h3>Satellite </h3>
-  <p> Welcome. Please enter the address you want a radar map for: </p>
+  <p> This project took the longest by far but I'm happy with how it turned out. 
+    Ever since I started working with API's I've wanted to find a public satellite imagery API and hook something up to it.
+    I got caught up trying to find a free API I could use, missing the easy solution: the snapshot tool from <a href="https://worldview.earthdata.nasa.gov/">NASA's Worldview site</a>.<br>
+    If I had a server with the ability to run AJAX I'd load the images directly on the page but since we're on Github Pages you'll need to click the links yourself.<br>
+    Images are refreshed daily(except for clear view, which refreshes every ten minutes!). <a href="https://opensource.gsfc.nasa.gov/nosa.php">All images courtesy of NASA.</a>
+  </p>
+  <h5>Please enter the address/city you'd like to view satellite images of: </h5>
   <label for="address">Address</label><br>
   <input type="text" id="address" name="address">
   <h3> <button type="button" onClick= "getCoords()" class="btn btn-primary">Search</button></h3>
-
+  
 <div id="lat" style="display: none;"><h2>Latitude </h2></div>
 <div id="lon" style="display: none;"><h2>Longitude </h2></div>
 
