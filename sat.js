@@ -38,18 +38,42 @@ function getCoords() {
                 var maxLon = x.position.lon +2;
                 var bbox = minLat + "," + minLon + "," + maxLat + "," + maxLon;
                 var marker = "MARKER="+lon+","+lat;
-                var fullURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-17T20:30:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=GOES-East_ABI_Band2_Red_Visible_1km,GOES-East_ABI_Band13_Clean_Infrared,GOES-West_ABI_Band13_Clean_Infrared,Himawari_AHI_Band13_Clean_Infrared,Coastlines_15m,Reference_Features_15m,Reference_Labels_15m&WRAP=x,x,x,x,x,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692306914001";
-                //var fullURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=2023-08-17T19:40:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=GOES-East_ABI_Band2_Red_Visible_1km,GOES-East_ABI_Band13_Clean_Infrared,Coastlines_15m,Reference_Features_15m,Reference_Labels_15m&WRAP=x,x,x,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692304385170";
-		$("#lat").html(lat);
+                let today = new Date();
+                console.log(today);
+                let dd = today.getDate();
+                let mm = today.getMonth() + 1;
+                let yyyy = today.getFullYear();
+                let hour = today.getHours();
+                let minute = today.getMinutes();
+
+                if (dd < 10) {
+                dd = '0' + dd;
+                }
+                if (mm < 10) {
+                 mm = '0' + mm;
+                }
+                if (hour < 10) {
+                 hour = '0' + hour;
+                }
+                if (minute < 10) {
+                        minute = '0' + minute;
+                       }
+                //Leaving hour/minute out of this bc weather radar updates daily; 
+                //might implement for clear view which updates every ten minutes.
+                today = yyyy + '-' + mm + '-' + dd;
+                var todayString = today.toString();
+                var radarURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=" + todayString + "T00:00:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=GOES-East_ABI_Band2_Red_Visible_1km,GOES-East_ABI_Band13_Clean_Infrared,GOES-West_ABI_Band13_Clean_Infrared,Himawari_AHI_Band13_Clean_Infrared,Coastlines_15m,Reference_Features_15m,Reference_Labels_15m&WRAP=x,x,x,x,x,x,x&FORMAT=image/jpeg&WIDTH=486&HEIGHT=486&" + marker + "&ts=1692306914001";
+                var clearURL = "https://wvs.earthdata.nasa.gov/api/v1/snapshot?REQUEST=GetSnapshot&TIME=" + todayString + "T00:00:00Z&BBOX=" + bbox + "&CRS=EPSG:4326&LAYERS=MODIS_Terra_CorrectedReflectance_TrueColor,Coastlines_15m,Reference_Features_15m&WRAP=day,x,x&FORMAT=image/jpeg&WIDTH=2987&HEIGHT=2588" + marker + "&ts=1692389710811";
+                $("#lat").html(lat);
 		$("#lon").html(lon);
-                //$("#url").html(fullURL);
 		
 
 		getWeather();
-                $("#url").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
-                console.log(fullURL);
-                $("#url").attr("href",fullURL);
-                
+                $("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
+                console.log(radarURL);
+                $("#radarURL").attr("href",radarURL);
+                $("#clearURL").attr("href",clearURL);
+
                 //window.location.reload();
                 
                 //Error handling

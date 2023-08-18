@@ -36,7 +36,7 @@ SOFTWARE. -->
 
   gtag('config', 'G-YD1LSCG5B6');
 </script>
-  <title>Weather Page</title>
+  <title>Satellite Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src= "sat.js"></script>
   <!--<link rel="shortcut icon"href="https://i.imgur.com/zxYuMlI.jpeg"> -->
@@ -81,8 +81,8 @@ SOFTWARE. -->
 </nav>
 
 <div class="container">
-  <h3>Weather </h3>
-  <p> Welcome. Please enter the address you want a forecast for: </p>
+  <h3>Satellite </h3>
+  <p> Welcome. Please enter the address you want a radar map for: </p>
   <label for="address">Address</label><br>
   <input type="text" id="address" name="address">
   <h3> <button type="button" onClick= "getCoords()" class="btn btn-primary">Search</button></h3>
@@ -90,7 +90,9 @@ SOFTWARE. -->
 <div id="lat" style="display: none;"><h2>Latitude </h2></div>
 <div id="lon" style="display: none;"><h2>Longitude </h2></div>
 <div id="YourCity">
-<a href=""  target="_blank" rel="noopener noreferrer"id="url"></a>
+<a href=""  target="_blank" rel="noopener noreferrer"id="radarURL">Weather Radar</a>
+<a href=""  target="_blank" rel="noopener noreferrer"id="clearURL">Clear View</a>
+<a href=""  target="_blank" rel="noopener noreferrer"id="nightURL">Night View</a>
 
 </div>
 
