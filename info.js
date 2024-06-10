@@ -46,44 +46,100 @@ function getCoords() {
             });
 	}		
 }
+
 function getWeather(){
 	var lat=document.getElementById("lat").innerText;
 	var lon=document.getElementById("lon").innerText;
+       
+
+                
                 var mapURL = "https://api.openweathermap.org/data/2.5/forecast?";
                 var mapURLBackHalf = "lat=" + lat + "&lon=" + lon + "&units=imperial&appid=520ff607520c3a81ffe9ce4c41a2c28e";
                 $.ajax({
+                        
                         url: mapURL+ mapURLBackHalf,
                         type: "GET",
                         success: function (data){
                         console.log(data);
-                        $("#day1Text").html(data.list[1].dt_txt  + "<br>" + data.list[1].weather[0].main + "<br>" + "Temperature is " + data.list[1].main.temp + "<br>" + "Feels like "+ data.list[1].main.feels_like); 
-			$("#day1Marker").html(data.list[1].weather[0].main);	
-			var markerOne = document.getElementById('day1Marker').innerText;
-                        document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[1].weather[0].icon + "@2x.png";
-			
-			//Day 2  is [9]?
-		       $("#day2Text").html(data.list[9].dt_txt  + "<br>" + data.list[9].weather[0].main + "<br>" + "Temperature is " + data.list[9].main.temp + "<br>" + "Feels like "+ data.list[9].main.feels_like);	
-                       $("#day2Marker").html(data.list[9].weather[0].main);
-                        var markerTwo = document.getElementById("day2Marker").innerText;
-                        document.getElementById("day2Image").src="http://openweathermap.org/img/wn/" + data.list[9].weather[0].icon + "@2x.png";
-			
-                        //Day 3 is [17]
-                        $("#day3Text").html(data.list[17].dt_txt  + "<br>" + data.list[17].weather[0].main + "<br>" + "Temperature is " + data.list[17].main.temp + "<br>" + "Feels like "+ data.list[17].main.feels_like);
-                        $("#day3Marker").html(data.list[17].weather[0].main);
-                       var markerThree = document.getElementById("day3Marker").innerText;
-                       document.getElementById("day3Image").src="http://openweathermap.org/img/wn/" + data.list[17].weather[0].icon + "@2x.png";
-			
-                       //Day 4 Noon is [25]
-                        $("#day4Text").html(data.list[25].dt_txt  + "<br>" + data.list[25].weather[0].main + "<br>" + "Temperature is " + data.list[25].main.temp + "<br>" + "Feels like "+ data.list[25].main.feels_like);
-                        $("#day4Marker").html(data.list[25].weather[0].main);
-                        var markerFour = document.getElementById("day4Marker");
-                        document.getElementById("day4Image").src="http://openweathermap.org/img/wn/" + data.list[25].weather[0].icon + "@2x.png";
+                       /*
+                        [Date time weirdness note]
+                        Doing all this date formatting to get around the weather api's odd format
+                        Their date format begins with current time slot and goes by every three hours from there.
+                        I need to know how many to go ahead in order to do daily averages.
+                        if user runs at 11 pm, [0] forecast will be at midnight. 
+                        if user runs at 1:00am, [0] forecast is 3:00am.
+                        originally i just added by 8 to go 24 hours from time of call for each day
+                        But this is inaccurate, so I fixed it below. Sorry it is messy
+                        
+                       */
 
-			//Day 5 Noon is [33]
-                        $("#day5Text").html(data.list[33].dt_txt  + "<br>" + data.list[33].weather[0].main + "<br>" + "Temperature is " + data.list[33].main.temp + "<br>" + "Feels like "+ data.list[33].main.feels_like);
-                        $("#day5Marker").html(data.list[33].weather[0].main);
-                        var markerFive = document.getElementById("day5Marker");
-                        document.getElementById("day5Image").src="http://openweathermap.org/img/wn/" + data.list[33].weather[0].icon + "@2x.png";
+                        let dateUTC =  data.list[0].dt_txt;
+                        let midnightCountdown = 0;
+                        let hour = dateUTC.substring(11,13)
+                        
+                        if (hour !="00"){
+                       
+                               midnightCountdown = Math.ceil(Math.ceil(24 - hour)/3); 
+                                                       
+                        }
+                        console.log(dateUTC);
+                        //console.log(data.list[0].dt_txt);
+                        console.log(hour);
+                        console.log(midnightCountdown);
+                        
+                        
+                        function getAverage (start, end){
+                                let AverageTemp = 0.0;
+                                let counter = start = 0;
+                                if (start == end){
+                                        return "No average,this day consists of 1 forecast. End of day?"
+                                }
+                                while (counter <= end){
+                                        console.log(data.list[counter].main.temp)
+                                        AverageTemp += Number(data.list[counter].main.temp);
+                                        counter++;
+                                }
+                                console.log(Number(AverageTemp/end));
+                                return AverageTemp/end;
+                        }
+                        let day1AverageTemp = getAverage(0,midnightCountdown);
+
+                        let day2AverageTemp = getAverage(midnightCountdown,midnightCountdown+8);
+                        let day3AverageTemp = getAverage(midnightCountdown+8,midnightCountdown+16);
+                        let day4AverageTemp = getAverage(midnightCountdown+16,midnightCountdown+24);
+                        let day5AverageTemp = getAverage(midnightCountdown+24,midnightCountdown+32);
+                        /* 
+                        //Adjusted time for local.
+                        let adjust = data.city.timezone;
+                        let date =  Date(data.list[0].dt_txt-adjust);
+                        //I cannot tell why date.getHours isn't working, but this substring method works.
+                        let dateAsString = String(date);
+                        let hour = dateAsString.substring(16,18)
+                        let untilTomorrow = 8-(hour/3);
+                        console.log(date);
+                        
+                        console.log(hour);
+                        console.log(untilTomorrow);
+                        console.log(data);
+                        */
+                        //We want the average weather between the current time - midnight.
+                        
+                        
+                        $("#day1Text").html(data.list[0].dt_txt  + "<br>" + data.list[0].weather[0].main + "<br>" + "Current temperature is " + data.list[0].main.temp + "<br>" + "Feels like "+ data.list[0].main.feels_like + "<br>" + "Daily average is "+ day1AverageTemp); 
+		        $("#day1Marker").html(data.list[0].weather[0].main);	
+			var markerOne = document.getElementById('day1Marker').innerText;
+                        document.getElementById("day1Image").src="http://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + "@2x.png";
+			
+                        $("#day2Text").html(data.list[midnightCountdown].dt_txt  + "<br>" + data.list[midnightCountdown].weather[0].main + "<br>" + " Temperature will be " + data.list[midnightCountdown].main.temp + "<br>" + "Feels like "+ data.list[0].main.feels_like + "<br>" + "Daily average is "+ day2AverageTemp); 
+		        $("#day2Marker").html(data.list[midnightCountdown].weather[0].main);	
+			var markerTwo = document.getElementById('day2Marker').innerText;
+                        document.getElementById("day2Image").src="http://openweathermap.org/img/wn/" + data.list[midnightCountdown].weather[0].icon + "@2x.png";
+			
+                        $("#day3Text").html(data.list[midnightCountdown+8].dt_txt  + "<br>" + data.list[midnightCountdown]+16.weather[0].main + "<br>" + " Temperature will be " + data.list[midnightCountdown].main.temp + "<br>" + "Feels like "+ data.list[0].main.feels_like + "<br>" + "Daily average is "+ day2AverageTemp); 
+		        $("#day3Marker").html(data.list[midnightCountdown].weather[0].main);	
+			var markerThree = document.getElementById('day3Marker').innerText;
+                        document.getElementById("day3Image").src="http://openweathermap.org/img/wn/" + data.list[midnightCountdown].weather[midnightCountdown+16].icon + "@2x.png";
+			
 			},
 
                         // Error handling
