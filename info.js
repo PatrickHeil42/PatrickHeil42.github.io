@@ -5,6 +5,16 @@ var backHalfCoords =".json?storeResult=false&limit=1&view=Unified&key=1f2gA7a0Iv
 //Working URL: https://api.tomtom.com/search/2/geocode/benton%20hall.json?storeResult=false&view=Unified&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn
 var fuzzySearchUrl = "https://api.tomtom.com/search/2/search/";
 var backHalfFuzzy = ".json?limit=1&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=all&key=1f2gA7a0IvDnjVS0wAqsVHVRiPoQKgkn";
+function getDays(){
+        let currentDay = new Date();
+        var day1 = currentDay.getDay();   
+        var day2 = currentDay.getDay()+1;
+        var day3 = currentDay.getDay()+2;
+        var day4 = currentDay.getDay()+3;
+        var day5 = currentDay.getDay()+4;
+        var day6 = currentDay.getDay()+5;        
+
+}
 
 function getCoords() {
 	var addressItem = document.getElementById('address');
@@ -103,7 +113,6 @@ function getWeather(){
                                 return AverageTemp/end;
                         }
                         let day1AverageTemp = getAverage(0,midnightCountdown);
-
                         let day2AverageTemp = getAverage(midnightCountdown,midnightCountdown+8);
                         let day3AverageTemp = getAverage(midnightCountdown+8,midnightCountdown+16);
                         let day4AverageTemp = getAverage(midnightCountdown+16,midnightCountdown+24);
