@@ -144,7 +144,7 @@ function getWeather(){
 			var markerTwo = document.getElementById('day2Marker').innerText;
                         document.getElementById("day2Image").src="http://openweathermap.org/img/wn/" + data.list[midnightCountdown].weather[0].icon + "@2x.png";
 			
-                        $("#day3Text").html(data.list[midnightCountdown+8].dt_txt  + "<br>" + data.list[midnightCountdown]+16.weather[0].main + "<br>" + " Temperature will be " + data.list[midnightCountdown].main.temp + "<br>" + "Feels like "+ data.list[0].main.feels_like + "<br>" + "Daily average is "+ day2AverageTemp); 
+                        $("#day3Text").html(data.list[midnightCountdown+8].dt_txt  + "<br>" + data.list[midnightCountdown].weather[0].main + "<br>" + " Temperature will be " + data.list[midnightCountdown].main.temp + "<br>" + "Feels like "+ data.list[0].main.feels_like + "<br>" + "Daily average is "+ day2AverageTemp); 
 		        $("#day3Marker").html(data.list[midnightCountdown].weather[0].main);	
 			var markerThree = document.getElementById('day3Marker').innerText;
                         document.getElementById("day3Image").src="http://openweathermap.org/img/wn/" + data.list[midnightCountdown].weather[midnightCountdown+16].icon + "@2x.png";
