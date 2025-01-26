@@ -18,6 +18,7 @@ function getDays(){
 
 function getCoords() {
 	var addressItem = document.getElementById('address');
+        
 	if (addressItem.value.length==0){
 	alert ("Please enter an address in the address box");
 
@@ -44,6 +45,7 @@ function getCoords() {
 		$("#lat").html(lat);
 		$("#lon").html(lon);
                 $("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
+                
 		getWeather();
                 //$("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
                 
