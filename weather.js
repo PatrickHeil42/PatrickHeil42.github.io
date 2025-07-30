@@ -13,6 +13,7 @@ var addressItem = document.getElementById('address');
 		//url = url1 + url2 + url3
 		//url1="search/"
 		//url3=".json"
+
 		$.ajax({
 		
                 // Our sample url to make request
@@ -60,3 +61,8 @@ function getWeather() {
 });
     
 }
+function getCoordsPageBroken() {
+    alert("Page under construction");
+  
+};
+
