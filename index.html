@@ -48,7 +48,14 @@ SOFTWARE.
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-  body{background-image : url('cityBackground.png');}
+  body{background-image : url('cityBackground.png');
+  background-size: cover;}
+
+  .blogSection{background-color:beige;
+  opacity: 0.8;
+  -ms-layout-grid-mode: line;}
+}
+
 
 </style
 </head>
@@ -81,15 +88,15 @@ SOFTWARE.
   </div>
 </nav>
 <div class="container">
-  <h1>Home </h1>
+
 
 <br>
 
+<div class="blogSection">
 <h2> Site Map</h2>
 
 <p>
 <br>
-
 
   <div class="row align-items-start">
     <div class="col">
@@ -97,17 +104,20 @@ SOFTWARE.
        
       This site and all it's code is posted on my <a href="https://github.com/PatrickHeil42/PatrickHeil42.github.io">github</a>. <br>
     </div>
-    <div class="col">
+    <br>
+   <div class="row align-items-start">
      <h3> Weather</h3>
       Chicago specific weather page. Plan on adding other city pages users can select from + improving CSS. 
     </div>
+       <br>
    
-    <div class="col">
+   <div class="row align-items-start">
      <h3> Satellite </h3>
          Page uses <a href="https://worldview.earthdata.nasa.gov/">NASA's Worldview site</a> to fetch semi live satelite images of area centered on searched city. Nighttime view is finicky w time zones; working on it.
      
      </div>
   </div>
+     <br>
   <div class="row align-items-start">
     <div class="col">
       <h3> P5.js </h3>
@@ -120,6 +130,7 @@ SOFTWARE.
     </div>
 
   </div>
+ </div>
  </div>
 </body>
 </html>
