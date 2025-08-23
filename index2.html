@@ -5,6 +5,7 @@
 	Purpose: Display current weather for the city of Chicago using NOAA API (api.weather.gov) + the free buoy pictures they take every 30 minutes (Ty NOAA + GLERL) https://www.glerl.noaa.gov/metdata/chi/metadata.html
 	Date: 08/09/2025
 	License: MIT License
+  Background image used the GLERL/NOAA open source webcam images posted here: https://www.glerl.noaa.gov/metdata/ .
 	
 Copyright (c) <2025> <Patrick Heil>
 
@@ -26,67 +27,87 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+
 -->
 
 
 
 <head>
   <style>
+    
+    #radarDiv {
+      justify-content: center;
+    }
 
-table {
+    #tableDiv {
+      display:grid;
+      text-align:center;
 
-border-collapse: collapse;
+    }
+    .center{
+      margin-right:auto;
+      margin-left:auto;
+      
+
+    }
+    table,
+    th,
+    td {
+      width:200px;
+      margin:auto;
+      border: 1px solid white;
+     
+    }
+
+    th,
+    td {
+      background-color: aquamarine;
+      border:1px solid black;
+      width:auto;
+      height:auto;
+      padding:10px;
+    }
 
 
+    body {
+      background-image: url('https://www.glerl.noaa.gov/metdata/chi/animate_webcams/cam1/frame01.jpg');
+    }
+  </style>
 
-}
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index2.html">Chicago Weather</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index3.html">Satellite</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index4.html"> P5.js Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="PH_Resume_2024.pdf" download>Resume</a>
+          </li>
 
-th, td {
-
-padding: 8px;
-border-style:double;
-text-align: left;
-
-border-bottom: 1px solid black;
-background-color:aquamarine;
-
-}
-
-body{background-image : url('https://www.glerl.noaa.gov/metdata/chi/animate_webcams/cam1/frame01.jpg');}
-</style>
-
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page"href="index2.html">Chicago Weather</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index3.html">Satellite</a>
-        </li>
-        <li class="nav-item">
-		      <a class="nav-link" href="index4.html"> P5.js Project</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="PH_Resume_2024.pdf" download>Resume</a>
-        </li>
-
-      </ul>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<html lang="en">
+  <html lang="en">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon"href="https://i.imgur.com/zxYuMlI.jpeg"> -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -96,62 +117,117 @@ body{background-image : url('https://www.glerl.noaa.gov/metdata/chi/animate_webc
 </head>
 
 <body>
-  
 
-<table>
-<thead>
-  <th scope="col"> Chicago Weather <div id="titleTh"></div></th>
-  
-</tr>
-</table>
+  <div id="tableDiv" class="center">
+
+    <table>
+      <thead>
+        <th scope="col"> Chicago Weather <div id="titleTh"></div>
+        </th>
+
+        </tr>
+    </table>
+<br>
+<h3> </h3>
+<br>
+
+    <table >
+
+      <tr>
+
+        <thead class="thead-dark">
+
+          <th scope="col">
+            <div id="name1"></div>
+          </th>
+
+          <th scope="col">
+            <div id="name2"></div>
+          </th>
+
+          <th scope="col">
+            <div id="name3"></div>
+          </th>
+
+          <th scope="col">
+            <div id="name4"></div>
+          </th>
+
+          <th scope="col">
+            <div id="name5"></div>
+          </th>
+      </tr>
+
+      <tbody>
+
+        <tr>
+
+          <td scope="row">
+            <div id="Temp1">°</div>
+          </td>
+
+          <td scope="row">
+            <div id="Temp2">°</div>
+          </td>
+
+          <td scope="row">
+            <div id="Temp3">°</div>
+          </td>
+
+          <td scope="row">
+            <div id="Temp4">°</div>
+          </td>
+
+          <td scope="row">
+            <div id="Temp5">°</div>
+          </td>
+
+        </tr>
+
+        <tr>
+
+          <td scope="row">
+            <div id="Forecast1"></div>
+          </td>
+
+          <td scope="row">
+            <div id="Forecast2"></div>
+          </td>
+
+          <td scope="row">
+            <div id="Forecast3"></div>
+          </td>
+
+          <td scope="row">
+            <div id="Forecast4"></div>
+          </td>
+
+          <td scope="row">
+            <div id="Forecast5"></div>
+          </td>
+
+        </tr>
+
+  </div>
+
+  </tbody>
+
+  </table>
+  <button class="center" onclick="showRadar()" id="radarButton">Show Weather Radar</button>
 
 
+  <div id="radarDiv">
+    <img src="https://radar.weather.gov/ridge/standard/CENTGRLAKES_loop.gif" alt="National Radar via NWS" width="500" height="500" />
+  </div>
 
-<table>
 
-<tr>
-
-<thead class="thead-dark">
-
-<th scope="col"> <div id="name1"></div></th>
-
-<th scope="col"> <div id="name2"></div></th>
-
-<th scope="col"> <div id="name3"></div></th>
-
-</tr>
-
-<tbody>
-
-<tr>
-
-<td scope="row"> <div id="Temp1">°</div></td>
-
-<td scope="row"> <div id="Temp2">°</div></td>
-
-<td scope="row"> <div id="Temp3">°</div></td>
-
-</tr>
-
-<tr>
-
-<td scope="row"> <div id="Forecast1"></div></td>
-
-<td scope="row"> <div id="Forecast2"></div></td>
-
-<td scope="row"> <div id="Forecast3"></div></td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-<img src="https://radar.weather.gov/ridge/standard/CENTGRLAKES_loop.gif" alt="National Radar via NWS"width="400" height="400" />
-
-<script src="WeatherJavascript.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="WeatherJavascript.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
 
 </body>
 
