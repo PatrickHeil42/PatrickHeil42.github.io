@@ -44,10 +44,10 @@ function getCoords() {
                                 var lon = x.position.lon;
                                 $("#lat").html(lat);
                                 $("#lon").html(lon);
-                                $("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
+                                //$("#YourCity").html(x.address.municipality + ", " + x.address.countrySubdivisionName);
 
                                 getWeather();
-                                //$("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
+                                $("#YourCity").html(data.address.municipality + ", " + data.address.countrySubdivisionName);
 
 
                                 //Error handling
