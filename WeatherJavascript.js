@@ -14,19 +14,22 @@ async function getP() {
 
       console.log(data);
 
-      //should be object.properties.periods[1] from json
+      //should be object.properties.periods[1] from json --- 
+      // This was Wrong! Should start with [0] to get current.
 
 
 
-      const data1 = data.properties.periods[1]
+      const data1 = data.properties.periods[0]
 
-      const data2 = data.properties.periods[2]
+      const data2 = data.properties.periods[1]
 
-      const data3 = data.properties.periods[3]
+      const data3 = data.properties.periods[2]
 
-      const data4 = data.properties.periods[4]
+      const data4 = data.properties.periods[3]
 
-      const data5 = data.properties.periods[5]
+      const data5 = data.properties.periods[4]
+
+      const data6 = data.properties.periods[5]
 
 
       //Filling in period name divs(Today, Tonight, Tomorrow Afternoon Etc)
