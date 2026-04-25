@@ -1,0 +1,982 @@
+<div class="mainInner">
+  <noscript>
+    <h3 class="noscriptWarning">Javascript is currently disabled on your computer. Without javascript, some display
+      enhancements do not work; however, all content is fully visible and accessible.</h3>
+  </noscript><a id="skipTarget"></a>
+  <div class="panel panel-default" title="page load time" id="timeBlock">
+    <div class="panel-body">
+      <span class="localTimeContainer" data-ts="2026-04-23T21:54:01-04:00">23 Apr 2026 - 21:54 EDT</span><br>
+      24 Apr 2026 - 01:54 UTC
+    </div>
+  </div>
+  <h1>GOES-19 Full Disk - GeoColor</h1>
+  <div id="msgContainer"> </div>
+  <h4>10 hour loop - 60 images - 10 minute update</h4>
+  <p><em>To enlarge, pause animation &amp; click the image. Hover over popups to zoom. Use slider to navigate.</em>
+  </p>
+  <div id="buttons">
+    <h2><label for="bandPick">Band:</label></h2>
+    <select id="bandPick" class="navSel" style="width: 15em !important;">
+      <option id="bGEOCOLOR" value="GEOCOLOR">GeoColor</option>
+      <option id="bEXTENT3" value="EXTENT3">GLM Flash Extent Density</option>
+      <option id="bAirMass" value="AirMass">Air Mass RGB</option>
+      <option id="bSandwich" value="Sandwich">Sandwich RGB</option>
+      <option id="bDMW" value="DMW">Derived Motion Winds</option>
+      <option id="bDayNightCloudMicroCombo" value="DayNightCloudMicroCombo">Day Night Cloud Micro Combo RGB</option>
+      <option id="bFireTemperature" value="FireTemperature">Fire Temperature RGB</option>
+      <option id="bDust" value="Dust">Dust RGB</option>
+      <option id="b01" value="01">1 - Visible: blue</option>
+      <option id="b02" value="02" title="corresponds approximately to GOES-13 visible channel">2 - Visible: red</option>
+      <option id="b03" value="03">3 - Near IR: "Veggie"</option>
+      <option id="b04" value="04">4 - Near IR: cirrus</option>
+      <option id="b05" value="05">5 - Near IR: snow/ice</option>
+      <option id="b06" value="06">6 - Near IR: cloud particle</option>
+      <option id="b07" value="07" title="corresponds approximately to GOES-13 infrared channel">7 - IR: shortwave
+      </option>
+      <option id="b08" value="08" title="corresponds approximately to GOES-13 water vapor channel">8 - IR: water vapor -
+        upper</option>
+      <option id="b09" value="09">9 - IR: water vapor - mid</option>
+      <option id="b10" value="10">10 - IR: water vapor - lower</option>
+      <option id="b11" value="11">11 - IR: cloud-top phase</option>
+      <option id="b12" value="12">12 - IR: ozone</option>
+      <option id="b13" value="13" title="corresponds approximately to GOES-13 IR cloud channel">13 - IR: clean longwave
+      </option>
+      <option id="b14" value="14">14 - IR: longwave</option>
+      <option id="b15" value="15">15 - IR: dirty longwave</option>
+      <option id="b16" value="16" title="corresponds approximately to GOES-13 longwave IR channel">16 - IR: CO₂ longwave
+      </option>
+    </select>&nbsp;&nbsp;
+    <h2><label for="animSizePick" title="set number of frames in animation loop">Loop:</label></h2>
+    <select id="animSizePick" class="navSel" title="set number of frames in animation loop"
+      style="width: 5em !important;">
+      <option id="s12" value="12">12</option>
+      <option id="s24" value="24">24</option>
+      <option id="s36" value="36">36</option>
+      <option id="s48" value="48">48</option>
+      <option id="s60" value="60">60</option>
+      <option id="s72" value="72">72</option>
+      <option id="s84" value="84">84</option>
+      <option id="s96" value="96">96</option>
+      <option id="s120" value="120">120</option>
+      <option id="s150" value="150">150</option>
+      <option id="s180" value="180">180</option>
+      <option id="s240" value="240">240</option>
+    </select>&nbsp;&nbsp;
+
+    <h2><label for="animDimension" title="choose smaller or larger animation">Size:</label></h2>
+    <select id="animDimension" class="navSel" title="choose smaller or larger animation" style="width: 5em !important;">
+      <option id="animRes0" value="0">Small</option>
+      <option id="animRes1" value="1">Large</option>
+    </select>&nbsp;&nbsp;
+    <input type="hidden" value="IsNotIE11" id="browserState">
+    <div class="btn-group" style="visibility: visible;"><a class="btn btn-primary btn-sm" id="prev"
+        href="javascript:void(0);" title="view previous image" aria-label="view previous image"><span
+          class="glyphicon glyphicon-step-backward"></span></a><a id="pause-resume" href="javascript:void(0);"
+        class="btn btn-primary btn-sm pause" title="pause animation" aria-label="pause animation"><span
+          class="glyphicon glyphicon-pause"></span></a><a id="next" href="javascript:void(0);"
+        class="btn btn-primary btn-sm" title="view next image" aria-label="view next image"><span
+          class="glyphicon glyphicon-step-forward"></span></a></div>
+    <div class="btn-group" style="visibility: visible;"><a id="looper-rocker" href="javascript:void(0);"
+        class="btn btn-primary btn-sm rocker" title="enable rocker-type animation"
+        aria-label="enable rocker-type animation">Rocker</a></div>
+    <div id="animSpeed" title="animation speed controls" class="btn-group"
+      style="border: 0px solid rgb(102, 102, 102) !important; visibility: visible;">
+      <a class="btn btn-primary btn-sm" id="goSlower" href="javascript:void(0);" title="slower animation"
+        aria-label="slower animation"><span class="glyphicon glyphicon-minus"></span></a><a
+        class="btn btn-primary btn-sm" id="goFaster" href="javascript:void(0);" title="faster animation"
+        aria-label="faster animation"><span class="glyphicon glyphicon-plus"></span></a>
+    </div>
+    <div class="btn-group" style="visibility: visible;"><a id="downloadGIF" href="javascript:void(0);"
+        class="btn btn-primary btn-sm" title="Download GIF animation" aria-label="Download GIF animation">Download</a>
+    </div>
+
+
+    <div class="btn-group" style="visibility: visible;"><a id="refreshLink" href="javascript:void(0);"
+        class="btn btn-primary btn-sm" title="Toggle auto-refresh setting for page"
+        aria-label="Toggle auto-refresh setting for page">Enable auto-refresh</a></div>
+    <div class="btn-group" style="visibility: visible;"><a id="siteHelp" href="systeminfo.php" target="_blank"
+        class="btn btn-info btn-sm" title="Site help" aria-label="Site help">Help</a></div>
+  </div>
+  <div class="clearing"></div>
+  <div id="MSEdgeWarning" style="display: none;">
+    <div id="MSEdgeWarningInner">
+      <h3>GOES Animations and Internet Explorer</h3>
+      <p>While GOES animation code will not run on older Internet Explorer browsers,
+        they work in the newest versions of Microsoft Edge. If you are using
+        Internet Explorer, please try a different browser: Chrome, Firefox, Safari, or
+        MS Edge are all supported.</p>
+    </div>
+  </div>
+
+  <div id="displayBox">
+    <div id="DayViewerAnimationBlock" class="animDiv" data-cycle-log="false" data-cycle-easing="easeInOutSine"
+      style="position: relative; height: 1037.23px; overflow: hidden;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="first cycle-slide"
+        style="position: absolute; top: 0px; left: 0px; z-index: 43; opacity: 0; display: block; visibility: hidden;">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1540 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131540_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1540 UTC"><img
+            id="F_1"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131540_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1540 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1540 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 42; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1550 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131550_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1550 UTC"><img
+            id="F_2"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131550_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1550 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1550 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 41; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1600 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131600_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1600 UTC"><img
+            id="F_3"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131600_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1600 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1600 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 40; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1610 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131610_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1610 UTC"><img
+            id="F_4"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131610_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1610 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1610 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div
+        style="opacity: 0.00394265; position: absolute; top: 0px; left: 0px; z-index: 100; visibility: visible; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1620 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131620_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1620 UTC"><img
+            id="F_5"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131620_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1620 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1620 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div
+        style="opacity: 1; position: absolute; top: 0px; left: 0px; z-index: 99; visibility: visible; display: block;"
+        class="cycle-slide cycle-slide-active">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1630 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131630_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1630 UTC"><img
+            id="F_6"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131630_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1630 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1630 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 97; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1640 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131640_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1640 UTC"><img
+            id="F_7"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131640_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1640 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1640 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 96; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1650 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131650_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1650 UTC"><img
+            id="F_8"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131650_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1650 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1650 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 95; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1700 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131700_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1700 UTC"><img
+            id="F_9"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131700_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1700 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1700 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 94; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1710 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131710_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1710 UTC"><img
+            id="F_10"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131710_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1710 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1710 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 93; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1720 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131720_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1720 UTC"><img
+            id="F_11"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131720_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1720 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1720 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 92; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1730 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131730_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1730 UTC"><img
+            id="F_12"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131730_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1730 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1730 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 91; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1740 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131740_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1740 UTC"><img
+            id="F_13"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131740_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1740 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1740 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 90; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1750 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131750_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1750 UTC"><img
+            id="F_14"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131750_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1750 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1750 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 89; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1800 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131800_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1800 UTC"><img
+            id="F_15"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131800_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1800 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1800 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 88; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1810 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131810_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1810 UTC"><img
+            id="F_16"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131810_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1810 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1810 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 87; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1820 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131820_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1820 UTC"><img
+            id="F_17"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131820_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1820 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1820 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 86; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1830 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131830_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1830 UTC"><img
+            id="F_18"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131830_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1830 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1830 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 85; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1840 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131840_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1840 UTC"><img
+            id="F_19"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131840_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1840 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1840 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 84; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1850 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131850_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1850 UTC"><img
+            id="F_20"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131850_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1850 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1850 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 83; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1900 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131900_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1900 UTC"><img
+            id="F_21"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131900_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1900 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1900 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 82; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1910 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131910_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1910 UTC"><img
+            id="F_22"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131910_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1910 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1910 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 81; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1920 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131920_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1920 UTC"><img
+            id="F_23"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131920_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1920 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1920 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 80; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1930 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131930_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1930 UTC"><img
+            id="F_24"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131930_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1930 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1930 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 79; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1940 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131940_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1940 UTC"><img
+            id="F_25"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131940_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1940 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1940 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 78; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 1950 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131950_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1950 UTC"><img
+            id="F_26"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261131950_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1950 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 1950 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 77; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2000 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132000_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2000 UTC"><img
+            id="F_27"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132000_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2000 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2000 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 76; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2010 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132010_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2010 UTC"><img
+            id="F_28"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132010_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2010 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2010 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 75; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2020 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132020_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2020 UTC"><img
+            id="F_29"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132020_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2020 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2020 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 74; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2030 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132030_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2030 UTC"><img
+            id="F_30"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132030_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2030 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2030 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 73; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2040 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132040_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2040 UTC"><img
+            id="F_31"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132040_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2040 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2040 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 72; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2050 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132050_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2050 UTC"><img
+            id="F_32"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132050_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2050 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2050 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 71; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2100 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132100_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2100 UTC"><img
+            id="F_33"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132100_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2100 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2100 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 70; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2110 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132110_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2110 UTC"><img
+            id="F_34"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132110_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2110 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2110 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 69; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2120 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132120_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2120 UTC"><img
+            id="F_35"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132120_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2120 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2120 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 68; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2130 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132130_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2130 UTC"><img
+            id="F_36"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132130_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2130 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2130 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 67; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2140 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132140_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2140 UTC"><img
+            id="F_37"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132140_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2140 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2140 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 66; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2150 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132150_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2150 UTC"><img
+            id="F_38"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132150_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2150 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2150 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 65; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2200 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132200_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2200 UTC"><img
+            id="F_39"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132200_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2200 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2200 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 64; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2210 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132210_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2210 UTC"><img
+            id="F_40"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132210_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2210 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2210 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 63; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2220 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132220_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2220 UTC"><img
+            id="F_41"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132220_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2220 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2220 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 62; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2230 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132230_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2230 UTC"><img
+            id="F_42"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132230_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2230 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2230 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 61; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2240 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132240_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2240 UTC"><img
+            id="F_43"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132240_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2240 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2240 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 60; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2250 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132250_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2250 UTC"><img
+            id="F_44"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132250_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2250 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2250 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 59; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2300 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132300_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2300 UTC"><img
+            id="F_45"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132300_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2300 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2300 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 58; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2310 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132310_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2310 UTC"><img
+            id="F_46"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132310_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2310 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2310 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 57; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2320 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132320_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2320 UTC"><img
+            id="F_47"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132320_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2320 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2320 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 56; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2330 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132330_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2330 UTC"><img
+            id="F_48"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132330_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2330 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2330 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 55; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2340 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132340_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2340 UTC"><img
+            id="F_49"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132340_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2340 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2340 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 54; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">23 Apr 2026 - 2350 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132350_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2350 UTC"><img
+            id="F_50"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261132350_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2350 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 23 Apr 2026 - 2350 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 53; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0000 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140000_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0000 UTC"><img
+            id="F_51"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140000_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0000 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0000 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 52; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0010 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140010_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0010 UTC"><img
+            id="F_52"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140010_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0010 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0010 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 51; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0020 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140020_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0020 UTC"><img
+            id="F_53"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140020_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0020 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0020 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 50; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0030 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140030_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0030 UTC"><img
+            id="F_54"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140030_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0030 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0030 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 49; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0040 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140040_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0040 UTC"><img
+            id="F_55"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140040_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0040 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0040 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 48; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0050 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140050_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0050 UTC"><img
+            id="F_56"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140050_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0050 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0050 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 47; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0100 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140100_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0100 UTC"><img
+            id="F_57"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140100_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0100 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0100 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 46; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0110 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140110_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0110 UTC"><img
+            id="F_58"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140110_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0110 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0110 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 45; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0120 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140120_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0120 UTC"><img
+            id="F_59"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140120_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0120 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0120 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+      <div style="opacity: 0; position: absolute; top: 0px; left: 0px; z-index: 44; visibility: hidden; display: block;"
+        class="cycle-slide">
+        <div class="animCaption">GeoColor - True Color daytime, multispectral IR at night - <span data-ts="x"
+            class="TZToggle">24 Apr 2026 - 0130 UTC</span></div>
+        <a href="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140130_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+          class="FBAnim" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0130 UTC"><img
+            id="F_60"
+            src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/FD/GEOCOLOR/20261140130_GOES19-ABI-FD-GEOCOLOR-1808x1808.jpg"
+            crossorigin="Anonymous"
+            alt="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0130 UTC" width="1808"
+            height="1808" title="GeoColor - True Color daytime, multispectral IR at night - 24 Apr 2026 - 0130 UTC"
+            class="img-responsive" decoding="sync"></a>
+      </div>
+    </div>
+    <div class="clearing"></div>
+  </div><!--// closing displayBox //-->
+  <div class="sliderBox">
+    <div id="animSlider"
+      class="animSlider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content sliderDetails"
+      title="drag slider to navigate images"><span tabindex="0"
+        class="ui-slider-handle ui-corner-all ui-state-default handleDetails" style="left: 6.77966%;"></span></div>
+  </div>
+  <div class="info">
+    <p><strong>GeoColor</strong> is a multispectral product composed of True Color (using a simulated green component)
+      during daytime, and an Infrared product that uses bands 7 and 13 at night. During the day, the imagery looks
+      approximately as it would when viewed with human eyes from space. At night, the blue colors represent liquid water
+      clouds such as fog and stratus, while gray to white indicate higher ice clouds, and the city lights come from a
+      static database derived from the VIIRS Day Night Band.</p>
+    <p>GeoColor was developed at the Cooperative Institute for Research in the Atmosphere (CIRA) and the STAR Regional
+      and Mesoscale Meteorology Branch (RAMMB). For a full description of the algorithm, please see this <a
+        href="https://doi.org/10.1175/JTECH-D-19-0134.1">article</a>.</p>
+    <p>Please credit <strong>CIRA/NOAA</strong> when using GeoColor imagery.</p>
+    <p><strong>NOTE:</strong> Lighted areas shown in nighttime images are not real-time depictions of city lights. The
+      layer is derived from a compilation of JPSS VIIRS Day Night Band images and is included for orientation purposes.
+    </p>
+    <p><em>• For more details, see the
+        <a href="documents/QuickGuide_CIRA_Geocolor_20171019.pdf" target="new">CIRA GeoColor Product Quick Guide</a>,
+        (<span>PDF, 1.24 MB</span>)</em></p>
+  </div>
+</div>
