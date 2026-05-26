@@ -83,7 +83,7 @@ function getCoords() {
                 $("#radarURL").html("Weather Radar link");
                 $("#clearURL").html("Clear View link");
                 $("#nightURL").html("Night View link");
-                //window.location.reload();
+                window.location.reload();
                 
                 //Error handling
 		},
